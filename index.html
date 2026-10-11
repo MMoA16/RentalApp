@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rental Manager</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="page">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Rental Business</p>
+          <h1>Rental Manager</h1>
+        </div>
+        <div class="topbar-actions">
+          <label class="month-picker">
+            <span>Month</span>
+            <input type="month" id="monthSelector" />
+            <span id="monthLabel" style="margin-left:12px;font-weight:600"></span>
+          </label>
+          <button id="pdfBtn" class="secondary-btn">Export PDF</button>
+          <button id="addPropertyBtn" class="primary-btn">Add Property</button>
+        </div>
+      </header>
+
+      <section class="stats-grid">
+        <div class="stat-card">
+          <span>Total Rent</span>
+          <strong id="totalRent">₹0</strong>
+        </div>
+        <div class="stat-card">
+          <span>Total Paid</span>
+          <strong id="totalPaid">₹0</strong>
+        </div>
+        <div class="stat-card">
+          <span>Total Deposit</span>
+          <strong id="totalDeposit">₹0</strong>
+        </div>
+        <div class="stat-card">
+          <span>Total Balance</span>
+          <strong id="totalBalance">₹0</strong>
+        </div>
+        <div class="stat-card">
+          <span>Total Bills</span>
+          <strong id="totalBills">₹0</strong>
+        </div>
+      </section>
+
+      <section class="report-panel">
+        <div class="report-header">
+          <h2 id="reportTitle">Monthly Report</h2>
+        </div>
+        <div class="report-grid">
+          <div class="report-box">
+            <span>Paid This Month</span>
+            <strong id="monthlyIncome">₹0</strong>
+          </div>
+          <div class="report-box">
+            <span>Utilities</span>
+            <strong id="monthlyUtilities">₹0</strong>
+          </div>
+          <div class="report-box">
+            <span>Outstanding</span>
+            <strong id="monthlyOutstanding">₹0</strong>
+          </div>
+        </div>
+      </section>
+
+      <section id="formSection" class="form-section hidden">
+        <h2 id="formTitle">Monthly Payment</h2>
+        <form id="propertyForm">
+          <div class="grid">
+            <label>
+              <span>House Name</span>
+              <input type="text" id="name" />
+            </label>
+            <label>
+              <span>Record Month</span>
+              <input type="month" id="recordMonth" required />
+            </label>
+            <label>
+              <span>Tenant Name</span>
+              <input type="text" id="tenantName" />
+            </label>
+            <label>
+              <span>Tenant Phone</span>
+              <input type="tel" id="tenantPhone" />
+            </label>
+            <label>
+              <span>Monthly Rent</span>
+              <input type="number" id="monthlyRent" min="0" step="0.01" />
+            </label>
+            <label>
+              <span>Amount Paid</span>
+              <input type="number" id="paidAmount" min="0" step="0.01" value="0" required />
+            </label>
+            <label>
+              <span>Deposit</span>
+              <input type="number" id="deposit" min="0" step="0.01" />
+            </label>
+            <label>
+              <span>Balance</span>
+              <input type="number" id="balance" min="0" step="0.01" value="0" readonly required />
+            </label>
+            <label>
+              <span>Current Bill</span>
+              <input type="number" id="currentBill" min="0" step="0.01" value="0" required />
+            </label>
+            <label>
+              <span>Water Bill</span>
+              <input type="number" id="waterBill" min="0" step="0.01" value="0" required />
+            </label>
+            <label style="grid-column: 1 / -1;">
+              <span>Notes</span>
+              <textarea id="notes" rows="3" placeholder="Add notes for this record"></textarea>
+            </label>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="primary-btn">Save</button>
+            <button type="button" id="cancelBtn" class="secondary-btn">Cancel</button>
+          </div>
+        </form>
+      </section>
+
+      <section id="tenantSection" class="form-section hidden">
+        <h2>Tenant Details</h2>
+        <form id="tenantForm">
+          <div class="grid">
+            <label>
+              <span>House Name</span>
+              <input type="text" id="tenantHouseName" required />
+            </label>
+            <label>
+              <span>Tenant Name</span>
+              <input type="text" id="tenantNameInput" required />
+            </label>
+            <label>
+              <span>Tenant Phone</span>
+              <input type="tel" id="tenantPhoneInput" />
+            </label>
+            <label>
+              <span>Monthly Rent</span>
+              <input type="number" id="tenantRentInput" min="0" step="0.01" required />
+            </label>
+            <label>
+              <span>Deposit</span>
+              <input type="number" id="tenantDepositInput" min="0" step="0.01" required />
+            </label>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="primary-btn">Save Tenant Details</button>
+            <button type="button" id="tenantCancelBtn" class="secondary-btn">Cancel</button>
+          </div>
+        </form>
+      </section>
+
+      <section class="table-section">
+        <div class="section-head">
+          <h2>Properties</h2>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>House</th>
+                <th>Tenant</th>
+                <th>Phone</th>
+                <th>Monthly Rent</th>
+                <th>Paid</th>
+                <th>Deposit</th>
+                <th>Balance</th>
+                <th>Current Bill</th>
+                <th>Water Bill</th>
+                <th>Notes</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="propertyTableBody"></tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.0/jspdf.umd.min.js"></script>
+    <!-- Firebase removed — app uses localStorage only -->
+    <script src="script.js"></script>
+  </body>
+</html>
