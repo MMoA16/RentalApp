@@ -1,0 +1,1 @@
+console.log('local length:', JSON.parse(localStorage.getItem('rental-website-properties-v1')||'[]').length); console.log('window.db:', !!window.db);
