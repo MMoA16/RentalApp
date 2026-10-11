@@ -1,0 +1,14 @@
+name = "rental-manager-worker"
+compatibility_date = "2026-09-28"
+
+main = "worker.js"
+
+account_id = "3cbd684d5c1769897d43ea4a7d999b2f"
+workers_dev = true
+
+[[kv_namespaces]]
+binding = "RENTAL_KV"
+id = "f2d9b6f4eeba4e8db8d41b1e1b4f0da7"
+
+[assets]
+directory = "../public"
